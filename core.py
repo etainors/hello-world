@@ -8,6 +8,9 @@ match_ip = re.compile(r'((?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)\.){3}(?:25[0-5]|
 from locale import getdefaultlocale
 LOCAL = getdefaultlocale()[1]
 
+from datetime import datetime
+datetime.utcnow().isoformat()
+
 from bs4 import BeautifulSoup
 bs = lambda i:BeautifulSoup(i, 'html.parser')
 
