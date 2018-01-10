@@ -21,6 +21,22 @@ def is_int(s):
     except:
         return False
 
+import os
+from time import sleep
+# lock resource
+def unlock():
+    os.remove('locked')
+
+def lock():
+    while True:
+        try:
+            fd = os.open('locked', os.O_WRONLY | os.O_CREAT | os.O_EXCL)
+            with os.fdopen(fd, 'w') as f:
+                f.write(str(os.getpid()))
+            return
+        except OSError:
+            sleep(0.1)
+
 if __name__ == '__main__':
     pass
 
