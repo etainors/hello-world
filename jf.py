@@ -16,7 +16,7 @@ _f2j_j_win = u'\u3454\u3447\u3439\u523e\u35f7\u360e\u36af\u36e3\u37c6\u3918\u3a2
 
 def _is_win():
     from sys import platform
-    return platform().startswith('win')
+    return platform.startswith('win')
 
 _j2f_j = _j2f_j_win if _is_win() else _j2f_j_wide
 _j2f_f = _j2f_f_win if _is_win() else _j2f_f_wide
