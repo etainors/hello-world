@@ -22,8 +22,8 @@ def is_int(s):
         return False
 
 # check os is windows
-from platform import platform
-is_win = platform().lower().startswith('win')
+from sys import platform
+is_win = platform().startswith('win')
 
 import os
 from time import sleep
