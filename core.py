@@ -23,7 +23,7 @@ def is_int(s):
 
 # check os is windows
 from sys import platform
-is_win = platform().startswith('win')
+is_win = platform.startswith('win')
 
 import os
 from time import sleep
