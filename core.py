@@ -21,6 +21,10 @@ def is_int(s):
     except:
         return False
 
+# check os is windows
+from platform import platform
+is_win = platform().lower().startswith('win')
+
 import os
 from time import sleep
 # lock resource
