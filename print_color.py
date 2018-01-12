@@ -55,5 +55,3 @@ def print_color(s, end='\n'):
 if __name__ == '__main__':
     map(lambda l:map(lambda k:print_color('\n'+'\n'.join(map(lambda j:'\033[%dm'%j+'\t'.join(map(lambda i:'\033[%dm%d %d'%(i, i, j), range(k, k+8)))+'\033[0m', range(l, l+8)))), [30, 90]), [40, 100])
     print
-    #print_color('\033[37;41masdf\033[m')
-    
