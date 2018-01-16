@@ -25,6 +25,19 @@ def is_int(s):
 from sys import platform
 is_win = platform.startswith('win')
 
+try:
+    from msvcrt import getch
+except ImportError:
+    def getch():
+        import sys, tty, termios
+        fd = sys.stdin.fileno()
+        old = termios.tcgetattr(fd)
+        try:
+            tty.setraw(fd)
+            return sys.stdin.read(1)
+        finally:
+            termios.tcsetattr(fd, termios.TCSADRAIN, old)
+
 import os
 from time import sleep
 # lock resource
