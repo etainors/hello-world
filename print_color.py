@@ -16,8 +16,11 @@ if _is_win:
     _p = _re.compile(r'\033\[[\d\;]*m')
 
     def _is_support(s):
-        n = int(s)
-        return n == 0 or n == 1 or (n >= 30 and n < 38) or (n >= 40 and n < 48) or (n >= 90 and n < 98) or (n >= 100 and n < 108)
+        try:
+            n = int(s)
+            return n == 0 or n == 1 or (n >= 30 and n < 38) or (n >= 40 and n < 48) or (n >= 90 and n < 98) or (n >= 100 and n < 108)
+        except:
+            return False
 
 def print_color(s, end='\n'):
 
