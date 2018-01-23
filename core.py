@@ -6,7 +6,7 @@ import re
 match_ip = re.compile(r'((?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d))')
 
 from locale import getdefaultlocale
-LOCAL = getdefaultlocale()[1]
+LOCAL = getdefaultlocale()[1] if getdefaultlocale()[1] else 'UTF-8'# for MAC
 
 from datetime import datetime
 datetime.utcnow().isoformat()
