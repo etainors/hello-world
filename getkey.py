@@ -1,12 +1,16 @@
 try:
     from msvcrt import getch
+
     def getkey():
         r = getch()
         if r == '\x00' or r == '\xe0':
             r += getch()
         return r
+
     _is_win = True
+
 except ImportError:
+
     def getch():
         import sys, tty, termios
         fd = sys.stdin.fileno()
@@ -16,6 +20,7 @@ except ImportError:
             return sys.stdin.read(1)
         finally:
             termios.tcsetattr(fd, termios.TCSADRAIN, old)
+
     def getkey():
         import signal
         def handler(signum, frame):
@@ -28,6 +33,7 @@ except ImportError:
                 r += getch()
         except:
             return r
+
     _is_win = False
 
 def keyselect(s, a):
@@ -468,4 +474,4 @@ class keymap:
         self.A_DEL = '\x00\xa3' if _is_win else '\x1b\x1b[3~'
 
 if __name__ == '__main__':
-    pass
+    print repr(getkey())
