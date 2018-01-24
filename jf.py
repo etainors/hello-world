@@ -50,11 +50,11 @@ def f2j(u):
 if __name__ == '__main__':
     from sys import argv
     from locale import getdefaultlocale
-    LOCAL = getdefaultlocale()[1]
+    LOCAL = getdefaultlocale()[1] if getdefaultlocale()[1] else 'UTF-8'# for MAC
     if len(argv) > 1 and argv[1] == '-t':
-        print j2f(' '.join(argv[2:]).decode(LOCAL))
+        print j2f(' '.join(argv[2:]).decode(LOCAL, errors='replace'))
     elif len(argv) > 1 and argv[1] == '-s':
-        print f2j(' '.join(argv[2:]).decode(LOCAL))
+        print f2j(' '.join(argv[2:]).decode(LOCAL, errors='replace'))
     else:
         print 'jf.py -t [chinese simplified]'
         print 'jf.py -s [chinese traditional]'
