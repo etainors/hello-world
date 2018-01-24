@@ -27,7 +27,8 @@ def print_color(*args, **kwargs):
     file = kwargs['file'] if 'file' in kwargs else stdout
     flush = kwargs['flush'] if 'flush' in kwargs else True
     
-    s = (sep.encode(LOCAL, errors='replace') if type(sep) == type(u'') else sep).__str__().join(map(lambda i:(i.encode(LOCAL, errors='replace') if type(i) == type(u'') else i).__str__(), args))
+    s = lambda i:(i.encode(LOCAL, errors='replace') if type(i) == type(u'') else i).__str__()
+    s = s(sep).join(map(s, args))+s(end)
     
     if platform.startswith('win'):
         
@@ -72,13 +73,13 @@ def print_color(*args, **kwargs):
                     c = c&15|(m[j%10]<<4)|128
             SCTA(GSH, c)
             f = a[1]
-        file.write(s[f:]+end)
+        file.write(s[f:])
         if flush:
             file.flush()
         SCTA(GSH, 7)
     
     else:
-        file.write(s+end)
+        file.write(s)
         if flush:
             file.flush()
 
