@@ -16,8 +16,7 @@ bs = lambda i:BeautifulSoup(i, 'html.parser')
 
 def is_int(s):
     try:
-        int(s)
-        return True
+        return int(s) == float(s)
     except:
         return False
 
