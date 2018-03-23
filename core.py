@@ -24,6 +24,9 @@ def is_int(s):
 from sys import platform
 is_win = platform.startswith('win')
 
+# return command output
+from subprocess import check_output
+
 # or
 from platform import platform
 is_win = platform().lower().startswith('win')
