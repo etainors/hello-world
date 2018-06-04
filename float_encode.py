@@ -29,3 +29,7 @@ def decode(s):
     elif type(s) == type('') or type(s) == type(u''):
         return ''.join(map(de, s.split()))                                                                             
     raise TypeError
+
+if __name__ == '__main__':
+    from sys import argv
+    print encode(' '.join(argv[1:]))
