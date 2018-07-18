@@ -47,6 +47,46 @@ def lock():
         except OSError:
             sleep(0.1)
 
+# thread version
+def timeout(target, sec):
+    from threading import Thread
+    from traceback import format_exc
+    def pass_return(target, a):
+        try:
+            a.append(target())
+            a.append(0)
+        except:
+            a.append(format_exc().split('\n')[-2])
+            a.append(1)
+    a = []
+    p = Thread(target=pass_return, args=(target, a))
+    p.setDaemon(True)
+    p.start()
+    p.join(sec)
+    if not len(a):
+        a.append('Exception: Timeout: custom timeout exceeded (%d seconds)'%(sec, ))
+        a.append(2)
+    return a[::-1]
+
+# multiprocess version
+def timeout(target, sec):
+    from multiprocessing import Process, Queue
+    from traceback import format_exc
+    def pass_return(target, a):
+        try:
+            a.put(target())
+            a.put(0)
+        except:
+            a.put(format_exc().split('\n')[-2])
+            a.put(1)
+    a = Queue()
+    p = Process(target=pass_return, args=(target, a))
+    p.start()
+    p.join(sec)
+    r = [a.get(), a.get()] if a.qsize() == 2 else ['Exception: Timeout: custom timeout exceeded (%d seconds)'%(sec, ), 2]
+    p.terminate()
+    return r[::-1]
+
 if __name__ == '__main__':
     pass
 
