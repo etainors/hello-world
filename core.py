@@ -30,6 +30,12 @@ is_win = platform().lower().startswith('win')
 
 # return command output
 from subprocess import check_output
+from commands import getoutput
+
+# 顯示錯誤資訊
+def errmess(n=1):
+    from traceback import format_exc
+    return '\n'.join(format_exc().split('\n')[-n-1:-1])
 
 import os
 from time import sleep
