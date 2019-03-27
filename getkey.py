@@ -29,7 +29,7 @@ except ImportError:
         r = getch()
         try:
             while True:
-                signal.setitimer(signal.ITIMER_REAL, 0.00001)
+                signal.setitimer(signal.ITIMER_REAL, 0.001)
                 r += getch()
         except:
             return r
