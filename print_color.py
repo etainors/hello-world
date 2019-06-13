@@ -41,6 +41,8 @@ def print_color(*args, **kwargs):
         m = [0, 4, 2, 6, 1, 5, 3, 7]
         
         def is_support(s):
+            if s == '':
+                return True
             try:
                 n = int(s)
                 return n == 0 or n == 1 or (n >= 30 and n < 38) or (n >= 40 and n < 48) or (n >= 90 and n < 98) or (n >= 100 and n < 108)
@@ -57,7 +59,7 @@ def print_color(*args, **kwargs):
                 file.write(s[f:a[0]])
                 if flush:
                     file.flush()
-            ca = map(int, filter(is_support, s[a[0]+2:a[1]-1].split(';')))
+            ca = map(lambda i:0 if i == '' else int(i), filter(is_support, s[a[0]+2:a[1]-1].split(';')))
             for j in ca:
                 if j == 0:
                     c = 7
