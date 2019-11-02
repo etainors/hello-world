@@ -20,6 +20,10 @@ def is_int(s):
     except:
         return False
 
+# Natural Sorting key
+def natsort(s):
+    return [int(i) if i.isdigit() else i for i in re.split(r'(\d+)', s)]
+
 # check os is windows
 from sys import platform
 is_win = platform.startswith('win')
