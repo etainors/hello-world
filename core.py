@@ -44,15 +44,15 @@ def errmess(n=1):
 import os
 from time import sleep
 # lock resource
-def unlock():
-    os.remove('locked')
+def unlock(f='locked'):
+    os.remove(f)
 
-def lock():
+def lock(f='locked'):
     while True:
         try:
-            fd = os.open('locked', os.O_WRONLY | os.O_CREAT | os.O_EXCL)
-            with os.fdopen(fd, 'w') as f:
-                f.write(str(os.getpid()))
+            fd = os.open(f, os.O_WRONLY | os.O_CREAT | os.O_EXCL)
+            with os.fdopen(fd, 'w') as fp:
+                fp.write(str(os.getpid()))
             return
         except OSError:
             sleep(0.1)
