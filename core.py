@@ -58,6 +58,7 @@ def lock(f='locked'):
                 fp.write(str(os.getpid()))
             return
         except OSError:
+            print('wait for lock', end='\r')
             sleep(0.1)
 
 # thread version
