@@ -45,7 +45,10 @@ import os
 from time import sleep
 # lock resource
 def unlock(f='locked'):
-    os.remove(f)
+    if os.path.isfile(f):
+        os.remove(f)
+    else:
+        print('not locked')
 
 def lock(f='locked'):
     while True:
